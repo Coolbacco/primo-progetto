@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
+    public Rigidbody2D rb;
 
     public float runSpeed;
 
@@ -15,14 +16,14 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        float mass = rb.mass;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed / mass;
 
         if (Input.GetButtonDown("Jump"))
         {
